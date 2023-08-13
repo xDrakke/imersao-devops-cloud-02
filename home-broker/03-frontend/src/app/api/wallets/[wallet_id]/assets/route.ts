@@ -6,7 +6,7 @@ export async function GET(
 ) {
   const response = await fetch(
     // Server side
-    `http://api:80/wallets/${params.wallet_id}/assets`,
+    `http://${process.env.TRADER_API_URL}/wallets/${params.wallet_id}/assets`,
     {
       //cache: 'no-store', processamento sempre dinamico
       next: {

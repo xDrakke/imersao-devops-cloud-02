@@ -13,7 +13,7 @@ import { isHomeBrokerClosed } from "../utils";
 async function getOrders(wallet_id: string): Promise<Order[]> {
   const response = await fetch(
     // Server side
-    `http://api:80/wallets/${wallet_id}/orders`,
+    `http://${process.env.TRADER_API_URL}/wallets/${wallet_id}/orders`,
     {
       next: {
         tags: [`orders-wallet-${wallet_id}`],

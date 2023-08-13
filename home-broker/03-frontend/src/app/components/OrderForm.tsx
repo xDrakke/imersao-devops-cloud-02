@@ -11,7 +11,7 @@ async function initTransaction(formData: FormData) {
   
   const response = await fetch(
     // Server side 
-    `http://api:80/wallets/${wallet_id}/orders`,
+    `http://${process.env.TRADER_API_URL}/wallets/${wallet_id}/orders`,
     {
       headers: {
         "Content-Type": "application/json",
