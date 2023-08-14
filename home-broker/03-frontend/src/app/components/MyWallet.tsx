@@ -36,7 +36,8 @@ export default function MyWallet(props: { wallet_id: string }) {
     error,
     mutate: mutateWalletAssets,
   } = useSWR<WalletAsset[]>(
-    `http://localhost:3001/api/wallets/${props.wallet_id}/assets`,
+    `http://${process.env.NEXT_PUBLIC_NEST_URL_API}/api/wallets/${props.wallet_id}/assets`,
+    //`http://${process.env.NEXT_PUBLIC_NEST_URL_API}/api/wallets/${props.wallet_id}/assets`,
     fetcher,
     {
       fallbackData: [],
@@ -46,9 +47,8 @@ export default function MyWallet(props: { wallet_id: string }) {
   );
 
   const { data: assetChanged } = useSWRSubscription(
-    `http://localhost:3000/assets/events`,
-    (path, { next }: SWRSubscriptionOptions) => {
-      
+    `http://${process.env.NEXT_PUBLIC_NEST_URL}/assets/events`,
+    (path: any, { next }: SWRSubscriptionOptions) => {
       const eventSource = new EventSource(path);
       eventSource.addEventListener("asset-price-changed", async (event) => {
         console.log(event);
@@ -80,7 +80,8 @@ export default function MyWallet(props: { wallet_id: string }) {
   );
 
   const {data: walletAssetUpdated} = useSWRSubscription(
-    `http://localhost:3000/wallets/${props.wallet_id}/assets/events`,
+    `http://${process.env.NEXT_PUBLIC_NEST_URL}/wallets/${props.wallet_id}/assets/events`,
+    //@ts-expect-error
     (path, { next }: SWRSubscriptionOptions) => {
       const eventSource = new EventSource(path);
 
