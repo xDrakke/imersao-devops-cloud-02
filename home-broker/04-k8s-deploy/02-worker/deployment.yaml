@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trader
+spec:
+  selector:
+    matchLabels:
+      app: trader
+  template:
+    metadata:
+      labels:
+        app: trader
+    spec:
+      containers:
+      - name: trader
+        image: fabricioveronez/trader-worker:v1
+        env:
+          - name: KAFKA_BOOTSTRAP_SERVERS
+            value: "kafka-service:9092"
+          - name: KAFKA_GROUP_ID
+            value: "myGroup"
+          - name: KAFKA_AUTO_OFFSET_RESET
+            value: "earliest"
