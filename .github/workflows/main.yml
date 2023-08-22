@@ -63,6 +63,15 @@ jobs:
         shell: bash
         run: |
           aws eks update-kubeconfig --name imersao-eks --region us-east-1
-      - name: Passo 03
-        run: echo "Deploy dos microsserviços no Kubernetes"
+      - name: Deploy no cluster Kubernetes
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            home-broker/04-k8s-deploy/02-worker/deployment.yaml
+            home-broker/04-k8s-deploy/03-api/deployment.yaml
+            home-broker/04-k8s-deploy/04-frontend/deployment.yaml
+          images: |
+            fabricioveronez/trader-web:${{github.run_number}}
+            fabricioveronez/trader-api:${{github.run_number}}
+            fabricioveronez/trader-worker:${{github.run_number}}
     
