@@ -17,6 +17,7 @@ jobs:
         run: echo "Subir as imagens para o repositório de imagens Docker (Dockerhub)"
   CD:
     runs-on: ubuntu-latest
+    needs: [CI]
     steps: 
       - name: Passo 01
         run: echo "Baixar a base de código"
