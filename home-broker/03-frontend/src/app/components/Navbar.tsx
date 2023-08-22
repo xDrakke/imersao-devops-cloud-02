@@ -20,7 +20,7 @@ export default function DefaultNavbar() {
           height={40}
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          DevOps Pro Investimentos - v2
+          DevOps Pro Investimentos - v3
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
