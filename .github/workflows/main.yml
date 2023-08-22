@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Passo 01
-        run: echo "Baixar a base de código"
+        run: ec "Baixar a base de código"
       - name: Passo 02
         run: echo "Criar a imagem dos Microsserviços"
       - name: Passo 03
