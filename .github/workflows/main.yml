@@ -44,8 +44,8 @@ jobs:
             fabricioveronez/trader-web:${{github.run_number}}
             fabricioveronez/trader-web:latest
           build-args: |
-            NEXT_PUBLIC_NEST_URL=a926f72ab200a45d3b0c784566538857-290598195.us-east-1.elb.amazonaws.com
-            NEXT_PUBLIC_NEST_URL_API=afe16f14318614b4ba8c02f07f89c68c-843941589.us-east-1.elb.amazonaws.com
+            next_url=a926f72ab200a45d3b0c784566538857-290598195.us-east-1.elb.amazonaws.com
+            next_url_api=afe16f14318614b4ba8c02f07f89c68c-843941589.us-east-1.elb.amazonaws.com
           
   CD:
     runs-on: ubuntu-latest
