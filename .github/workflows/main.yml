@@ -44,8 +44,8 @@ jobs:
             fabricioveronez/trader-web:${{github.run_number}}
             fabricioveronez/trader-web:latest
           build-args: |
-            next_url=a926f72ab200a45d3b0c784566538857-290598195.us-east-1.elb.amazonaws.com
-            next_url_api=afe16f14318614b4ba8c02f07f89c68c-843941589.us-east-1.elb.amazonaws.com
+            NEXT_PUBLIC_NEST_URL=a926f72ab200a45d3b0c784566538857-290598195.us-east-1.elb.amazonaws.com
+            NEXT_PUBLIC_NEST_URL_API=afe16f14318614b4ba8c02f07f89c68c-843941589.us-east-1.elb.amazonaws.com
           
   CD:
     runs-on: ubuntu-latest
@@ -63,27 +63,26 @@ jobs:
         shell: bash
         run: |
           aws eks update-kubeconfig --name imersao-eks --region us-east-1
-      - name: Deploy no cluster Kubernetes
+      - name: Deploy do worker no cluster Kubernetes 
         uses: Azure/k8s-deploy@v4.9
         with:
           manifests: |
-            ./home-broker/04-k8s-deploy/02-worker/deployment.yaml
+            home-broker/04-k8s-deploy/02-worker/deployment.yaml
           images: |
             fabricioveronez/trader-worker:${{github.run_number}}
-      - name: Deploy no cluster Kubernetes
+            
+      - name: Deploy da api no cluster Kubernetes
         uses: Azure/k8s-deploy@v4.9
         with:
           manifests: |
-            ./home-broker/04-k8s-deploy/03-api/deployment.yaml
+            home-broker/04-k8s-deploy/03-api/deployment.yaml
           images: |
             fabricioveronez/trader-api:${{github.run_number}}
-      - name: Deploy no cluster Kubernetes
+
+      - name: Deploy do frontend no cluster Kubernetes
         uses: Azure/k8s-deploy@v4.9
         with:
           manifests: |
-            ./home-broker/04-k8s-deploy/04-frontend/deployment.yaml
+            home-broker/04-k8s-deploy/04-frontend/deployment.yaml
           images: |
             fabricioveronez/trader-web:${{github.run_number}}
-            
-            
-    
