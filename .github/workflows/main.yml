@@ -53,8 +53,16 @@ jobs:
     steps: 
       - name: Checkout da base de código
         uses: actions/checkout@v3.5.3
-      - name: Passo 02
-        run: echo "Autenticar na AWS"
+      - name: Configurar as credenciais de acesso
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Configuração do Kubeconfig
+        shell: bash
+        run: |
+          aws eks update-kubeconfig --name imersao-eks --region us-east-1
       - name: Passo 03
         run: echo "Deploy dos microsserviços no Kubernetes"
     
