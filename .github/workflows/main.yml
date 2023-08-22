@@ -68,11 +68,21 @@ jobs:
         with:
           manifests: |
             ./home-broker/04-k8s-deploy/02-worker/deployment.yaml
-            ./home-broker/04-k8s-deploy/03-api/deployment.yaml
-            ./home-broker/04-k8s-deploy/04-frontend/deployment.yaml
           images: |
             fabricioveronez/trader-worker:${{github.run_number}}
+      - name: Deploy no cluster Kubernetes
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            ./home-broker/04-k8s-deploy/03-api/deployment.yaml
+          images: |
             fabricioveronez/trader-api:${{github.run_number}}
+      - name: Deploy no cluster Kubernetes
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            ./home-broker/04-k8s-deploy/04-frontend/deployment.yaml
+          images: |
             fabricioveronez/trader-web:${{github.run_number}}
             
             
