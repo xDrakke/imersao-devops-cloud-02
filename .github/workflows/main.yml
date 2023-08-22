@@ -71,7 +71,9 @@ jobs:
             home-broker/04-k8s-deploy/03-api/deployment.yaml
             home-broker/04-k8s-deploy/04-frontend/deployment.yaml
           images: |
-            fabricioveronez/trader-web:${{github.run_number}}
-            fabricioveronez/trader-api:${{github.run_number}}
             fabricioveronez/trader-worker:${{github.run_number}}
+            fabricioveronez/trader-api:${{github.run_number}}
+            fabricioveronez/trader-web:${{github.run_number}}
+            
+            
     
