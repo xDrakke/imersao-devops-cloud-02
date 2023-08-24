@@ -8,6 +8,8 @@ import { OrdersModule } from './orders/orders.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { SimulateAssetsPriceCommand } from './simulate-assets-price.command';
+import { PrometheusModule } from "@willsoto/nestjs-prometheus";
+
 
 @Module({
   imports: [
@@ -17,6 +19,11 @@ import { SimulateAssetsPriceCommand } from './simulate-assets-price.command';
     WalletsModule,
     OrdersModule,
     MongooseModule.forRoot(process.env.DATABASE_URL),
+    PrometheusModule.register({
+      defaultLabels: {
+        version: "v1",
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, SimulateAssetsPriceCommand],
